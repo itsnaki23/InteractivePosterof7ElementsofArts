@@ -1,0 +1,155 @@
+:root{
+  --paper:#f2ebdc;
+  --ink:#241f1a;
+  --ink-soft:#5b5347;
+  --accent:#8a6d3b;
+  --accent2:#3f6659;
+  --card:#fbf7ec;
+  --line:#cdbfa2;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#1d1a15; --ink:#f2ecdc; --ink-soft:#c9bfa8; --card:#26221b; --line:#443d31;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#1d1a15; --ink:#f2ecdc; --ink-soft:#c9bfa8; --card:#26221b; --line:#443d31;
+}
+
+*{box-sizing:border-box;}
+
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family: 'Iowan Old Style','Palatino Linotype',Palatino,Georgia,serif;
+  padding:2.5rem 1.25rem 3rem;
+  min-height:100vh;
+}
+
+.wrap{max-width:920px;margin:0 auto;}
+
+header{margin-bottom:2.2rem;}
+
+.kicker{
+  font-family: Georgia, serif;
+  font-style:italic;
+  color:var(--accent2);
+  font-size:0.95rem;
+  letter-spacing:0.02em;
+  margin:0 0 0.4rem;
+}
+
+h1{
+  font-size:clamp(1.9rem,5vw,3rem);
+  line-height:1.05;
+  margin:0 0 0.6rem;
+  font-weight:600;
+  max-width:14ch;
+}
+
+header p{
+  max-width:56ch;
+  color:var(--ink-soft);
+  font-size:1.02rem;
+  line-height:1.55;
+  margin:0;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(210px,1fr));
+  gap:1rem;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line);
+  border-radius:2px;
+  padding:1.1rem 1.1rem 1rem;
+  cursor:pointer;
+  position:relative;
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+}
+
+.card:hover{
+  transform:translateY(-4px);
+  border-color:var(--accent2);
+  box-shadow:0 10px 22px -12px rgba(0,0,0,0.35);
+}
+
+.card:active{
+  transform:translateY(-1px);
+}
+
+.card:focus-visible{outline:2px solid var(--accent2); outline-offset:3px;}
+
+.card:hover .card-name{color:var(--accent2);}
+
+.card:hover .icon path,
+.card:hover .icon circle,
+.card:hover .icon polygon,
+.card:hover .icon rect,
+.card:hover .icon line{
+  stroke:var(--accent2);
+}
+
+.card:hover .toggle{
+  border-color:var(--accent2);
+  color:var(--accent2);
+}
+
+.card-top{
+  display:flex; align-items:baseline; justify-content:space-between; gap:0.5rem;
+  border-bottom:1px solid var(--line);
+  padding-bottom:0.55rem; margin-bottom:0.8rem;
+}
+
+.card-num{color:var(--accent); font-size:0.85rem; font-variant-numeric:tabular-nums;}
+
+.card-name{font-size:1.15rem; font-weight:600; margin:0; transition:color .2s ease;}
+
+svg.icon{width:100%; height:86px; display:block; margin:0 auto 0.3rem;}
+
+.icon path,.icon circle,.icon polygon,.icon rect,.icon line{
+  stroke:var(--ink); fill:none; stroke-width:1.6;
+  transition:stroke .2s ease;
+}
+
+.icon .fill-accent{fill:var(--accent); stroke:none;}
+.icon .fill-accent2{fill:var(--accent2); stroke:none;}
+
+.caption{
+  font-size:0.85rem; color:var(--ink-soft); margin-top:0.5rem; line-height:1.4;
+}
+
+.detail{
+  max-height:0; overflow:hidden; transition:max-height .35s ease;
+}
+
+.card.open .detail{max-height:220px;}
+
+.detail-inner{
+  padding-top:0.7rem; margin-top:0.7rem; border-top:1px dashed var(--line);
+  font-size:0.92rem; color:var(--ink); line-height:1.5;
+}
+
+.toggle{
+  position:absolute; top:1.1rem; right:1.1rem;
+  width:22px; height:22px; border-radius:50%;
+  border:1px solid var(--line);
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.8rem; color:var(--ink-soft);
+  transition:transform .3s ease, border-color .2s ease, color .2s ease;
+}
+
+.card.open .toggle{transform:rotate(180deg); border-color:var(--accent2); color:var(--accent2);}
+
+footer{
+  margin-top:2.2rem; text-align:center; color:var(--ink-soft); font-size:0.85rem;
+  font-style:italic;
+}
+
+@media (prefers-reduced-motion: reduce){
+  .card, .detail, .toggle{transition:none;}
+}
